@@ -1,12 +1,16 @@
 package com.savahl.mebank.codechallenge.dao;
 
+import static org.junit.Assert.assertEquals;
+
 import com.savahl.mebank.codechallenge.Transaction;
 import com.savahl.mebank.codechallenge.TransactionType;
-import org.junit.Test;
 
 import java.time.format.DateTimeFormatter;
+import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+
+
+
 
 public class TransactionParserTest {
 
@@ -32,7 +36,8 @@ public class TransactionParserTest {
     public void testReversalType() {
         TransactionParser parser = new TransactionParser();
 
-        final String line = "TX10001, ACC334455, ACC778899, 20/10/2018 12:47:55, 25.00, REVERSAL, TXN10002";
+        final String line =
+                "TX10001, ACC334455, ACC778899, 20/10/2018 12:47:55, 25.00, REVERSAL, TXN10002";
         Transaction transaction = parser.parseTransaction(line);
 
         // assert that the values are correct

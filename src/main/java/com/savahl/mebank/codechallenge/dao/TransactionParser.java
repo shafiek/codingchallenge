@@ -14,8 +14,8 @@ class TransactionParser {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
     /**
-     * Pares the txnAsString to a {@link Transaction}.  It assumes that txnAsString is in the correct
-     * format.  An improveent to this would be to quite a bit of error handling.
+     * Pares the txnAsString to a {@link Transaction}.  It assumes that txnAsString is in the
+     * correct format.  An improvement to this would be to quite a bit of error handling.
      *
      * @param txnAsString The String to parse into a Transaction
      * @return an instance of a {@link Transaction}
@@ -32,7 +32,7 @@ class TransactionParser {
 
         String relatedTransaction = null;
 
-        if(TransactionType.REVERSAL == transactionType) {
+        if (TransactionType.REVERSAL == transactionType) {
             relatedTransaction = parts[6].trim();
         }
 

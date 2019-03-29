@@ -23,7 +23,8 @@ public class TransactionDao {
      * @return List of matching Transactions
      * @throws IOException .
      */
-    List<Transaction> getTransactionsByAccountNumber(final String accountNbr, final InputStream inputStream)
+    List<Transaction> getTransactionsByAccountNumber(final String accountNbr,
+                                                     final InputStream inputStream)
             throws IOException {
 
         List<Transaction> transactions = Lists.newArrayList();
@@ -31,6 +32,8 @@ public class TransactionDao {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         String line;
 
+        // Read through all the lines and extract all Transaction that have a from
+        // or to account that matches accountNbr
         while ((line = reader.readLine()) != null) {
             Transaction transaction = parser.parseTransaction(line);
             if (transaction.getFromAccountId().equals(accountNbr)
