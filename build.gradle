@@ -1,0 +1,65 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'org.owasp:dependency-check-gradle:5.0.0-M2'
+    }
+}
+
+// Apply the java plugin to add support for Java
+apply plugin: 'java'
+
+// Apply the application plugin to add support for building an application
+apply plugin: 'application'
+
+apply plugin: 'jacoco'
+
+//dependency check plugin
+apply plugin: 'org.owasp.dependencycheck'
+
+// check style
+apply plugin: 'checkstyle'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    // This dependency is found on compile classpath of this component and consumers.
+    compile group: 'com.google.guava', name: 'guava', version: '27.1-jre'
+
+    // Use JUnit test framework
+    testCompile 'junit:junit:4.12'
+
+    // https://mvnrepository.com/artifact/org.mockito/mockito-core
+    testCompile group: 'org.mockito', name: 'mockito-core', version: '2.7.2'
+}
+
+test {
+    reports {
+        junitXml.enabled = false
+        html.enabled = true
+    }               
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination file("${buildDir}/jacocoHtml")
+    }
+}
+
+dependencyCheck {
+  failBuildOnCVSS = 1
+  failOnError = true
+}
+
+// checkstyle
+checkstyle {
+    toolVersion '8.18';
+}
+
+// Define the main class for the application
+mainClassName = 'com.com.savahl.mebank.codechallenge.App'
