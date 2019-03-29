@@ -69,17 +69,4 @@ public class Transaction {
     public String getRelatedTransaction() {
         return relatedTransaction;
     }
-
-    @Override
-    public String toString() {
-        return "Transaction{"
-                + "transactionId='" + transactionId + '\''
-                + ", fromAccountId='" + fromAccountId + '\''
-                + ", toAccountId='" + toAccountId + '\''
-                + ", createAt=" + createAt
-                + ", amount=" + amount
-                + ", type=" + type
-                + ", relatedTransaction='" + relatedTransaction + '\''
-                + '}';
-    }
 }

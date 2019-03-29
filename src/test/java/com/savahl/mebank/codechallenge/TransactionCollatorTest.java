@@ -1,17 +1,18 @@
-package com.savahl.mebank.codechallenge.dao;
+package com.savahl.mebank.codechallenge;
 
 import static org.junit.Assert.assertEquals;
 
-import com.savahl.mebank.codechallenge.Transaction;
+import com.savahl.mebank.codechallenge.dao.TransactionDao;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 import org.junit.Test;
 
-public class TransactionDaoTest {
+public class TransactionCollatorTest {
 
     private final String
             txns = "TX10001, ACC334455, ACC778899, 20/10/2018 12:47:55, 25.00, PAYMENT\n"
@@ -22,13 +23,26 @@ public class TransactionDaoTest {
 
     @Test
     public void testRetrieveByAccountId() throws IOException {
+
+        // Set up the test
         InputStream inputStream = new ByteArrayInputStream(txns.getBytes());
 
         TransactionDao transactionDao = new TransactionDao();
 
-        Map<String, Transaction> transactions =
-                transactionDao.getTransactionsByAccountNumber("ACC334455", inputStream);
+        final String accountNbr = "ACC334455";
 
-        assertEquals(4, transactions.size());
+        Map<String, Transaction> transactions =
+                transactionDao.getTransactionsByAccountNumber(accountNbr, inputStream);
+
+        // Perform the action
+        LocalDateTime from = LocalDateTime.of(2018, 10, 20, 12, 0, 0);
+        LocalDateTime to = LocalDateTime.of(2018, 10, 20, 19, 0, 0);
+
+        TransactionCollator collator = new TransactionCollator();
+        TransactionSummary summary = collator.collate(accountNbr, from, to, transactions);
+
+        // Assert the values
+        assertEquals(1, summary.getNumberOfTransactions());
+        assertEquals(-25.0f, summary.getAmount(), 0.0f);
     }
 }

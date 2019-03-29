@@ -15,7 +15,7 @@ class TransactionParser {
 
     /**
      * Pares the txnAsString to a {@link Transaction}.  It assumes that txnAsString is in the
-     * correct format.  An improvement to this would be to quite a bit of error handling.
+     * correct format.  An improvement to this would be to addquite a bit of error handling.
      *
      * @param txnAsString The String to parse into a Transaction
      * @return an instance of a {@link Transaction}

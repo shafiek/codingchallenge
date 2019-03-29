@@ -1,33 +1,31 @@
 package com.savahl.mebank.codechallenge.dao;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.savahl.mebank.codechallenge.Transaction;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.List;
+import java.util.Map;
 
 public class TransactionDao {
 
     private TransactionParser parser = new TransactionParser();
 
-    TransactionDao() {
-    }
-
     /**
-     * This will return a List of Transactions that contain a fromAccount number or
-     * to accountNumber that matches accountNbr.
+     * This will return a Map&gt;TransactionId, Transaction&lt; of Transactions that contain a
+     * fromAccount number or to accountNumber that matches accountNbr.
+     *
      * @param accountNbr The account number to match
      * @return List of matching Transactions
      * @throws IOException .
      */
-    List<Transaction> getTransactionsByAccountNumber(final String accountNbr,
-                                                     final InputStream inputStream)
+    public Map<String, Transaction> getTransactionsByAccountNumber(final String accountNbr,
+                                                            final InputStream inputStream)
             throws IOException {
 
-        List<Transaction> transactions = Lists.newArrayList();
+        Map<String, Transaction> transactions = Maps.newLinkedHashMap();
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         String line;
@@ -38,14 +36,11 @@ public class TransactionDao {
             Transaction transaction = parser.parseTransaction(line);
             if (transaction.getFromAccountId().equals(accountNbr)
                     || transaction.getFromAccountId().equals(accountNbr)) {
-                transactions.add(transaction);
+                transactions.put(transaction.getTransactionId(), transaction);
             }
         }
 
 
         return transactions;
     }
-
-
-
 }
