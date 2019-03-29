@@ -21,8 +21,11 @@ apply plugin: 'org.owasp.dependencycheck'
 // check style
 apply plugin: 'checkstyle'
 
+// pmd
+apply plugin: 'pmd'
+
 repositories {
-    jcenter()
+    mavenCentral()
 }
 
 dependencies {
@@ -58,8 +61,20 @@ dependencyCheck {
 
 // checkstyle
 checkstyle {
-    toolVersion '8.18';
+    toolVersion '8.18'
+    ignoreFailures = false
 }
+
+// pmd
+pmd {
+    toolVersion = '6.12.0'
+    sourceSets = [sourceSets.main]
+    ignoreFailures = false
+    reportsDir = file("$project.buildDir/pmdReports")
+    ruleSetFiles = files("config/pmd/pmd-ruleset.xml")
+    ruleSets = []
+}
+//tasks.pmdMain.dependsOn(downloadPMDConfig)
 
 // Define the main class for the application
 mainClassName = 'com.com.savahl.mebank.codechallenge.App'
