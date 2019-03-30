@@ -69,7 +69,7 @@ public class App {
                 + "The accountId for which you would like to print the details");
         System.err.println("\t-from\t\t"
                 + "The from Date Time in in the format DD/MM/YYYY hh:mm:ss");
-        System.err.println("\t-to\t\t\t"
+        System.err.println("\t-to\t\t"
                 + "The to Date Time in in the format DD/MM/YYYY hh:mm:ss");
 
         System.err.println("\n\nExample: "
