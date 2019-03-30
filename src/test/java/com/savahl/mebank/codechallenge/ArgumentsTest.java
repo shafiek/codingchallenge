@@ -18,7 +18,7 @@ public class ArgumentsTest {
         LocalDateTime to = LocalDateTime.now().plusHours(1);
 
         Path tempFile = Files.createTempFile("test", "csv");
-        Arguments arguments = new Arguments(tempFile.toAbsolutePath().toString(), from, to);
+        Arguments arguments = new Arguments("a", tempFile.toAbsolutePath().toString(), from, to);
 
         assertTrue(arguments.isValid());
     }
@@ -29,7 +29,7 @@ public class ArgumentsTest {
         LocalDateTime to = LocalDateTime.now().minusHours(1);
 
         Path tempFile = Files.createTempFile("test", "csv");
-        Arguments arguments = new Arguments(tempFile.toAbsolutePath().toString(), from, to);
+        Arguments arguments = new Arguments("a", tempFile.toAbsolutePath().toString(), from, to);
 
         assertFalse(arguments.isValid());
     }
@@ -39,7 +39,7 @@ public class ArgumentsTest {
         LocalDateTime from = LocalDateTime.now();
         LocalDateTime to = LocalDateTime.now().plusHours(1);
 
-        Arguments arguments = new Arguments("unknown.csv", from, to);
+        Arguments arguments = new Arguments("a", "unknown.csv", from, to);
 
         assertFalse(arguments.isValid());
     }

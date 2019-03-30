@@ -14,7 +14,7 @@ public class TransactionDao {
     private TransactionParser parser = new TransactionParser();
 
     /**
-     * This will return a Map&gt;TransactionId, Transaction&lt; of Transactions that contain a
+     * This will return a Map&lt;TransactionId, Transaction&gt; of Transactions that contain a
      * fromAccount number or to accountNumber that matches accountNbr.
      *
      * @param accountNbr The account number to match
@@ -35,7 +35,7 @@ public class TransactionDao {
         while ((line = reader.readLine()) != null) {
             Transaction transaction = parser.parseTransaction(line);
             if (transaction.getFromAccountId().equals(accountNbr)
-                    || transaction.getFromAccountId().equals(accountNbr)) {
+                    || transaction.getToAccountId().equals(accountNbr)) {
                 transactions.put(transaction.getTransactionId(), transaction);
             }
         }

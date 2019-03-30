@@ -11,6 +11,7 @@ class ArgumentParser {
 
     Arguments parse(final String[] args) {
 
+        String accountId = null;
         String filename = null;
         String fromString = null;
         String toString = null;
@@ -18,6 +19,9 @@ class ArgumentParser {
         for (int x = 0; x < args.length; x++) {
             if ("-file".equals(args[x])) {
                 filename = args[x + 1];
+                x++;
+            } else if ("-accountId".equals(args[x])) {
+                accountId = args[x + 1];
                 x++;
             } else if ("-from".equals(args[x])) {
                 fromString = args[x + 1];
@@ -38,6 +42,6 @@ class ArgumentParser {
             to = LocalDateTime.parse(toString, formatter);
         }
 
-        return new Arguments(filename, from, to);
+        return new Arguments(accountId, filename, from, to);
     }
 }

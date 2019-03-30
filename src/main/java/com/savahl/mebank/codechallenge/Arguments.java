@@ -9,16 +9,23 @@ import org.apache.commons.lang3.StringUtils;
 
 class Arguments {
 
+    private final String accountNbr;
     private final String filename;
     private final LocalDateTime fromDateTime;
     private final LocalDateTime toDateTime;
 
-    Arguments(final String filename,
+    Arguments(final String accountNbr,
+              final String filename,
               final LocalDateTime fromDateTime,
               final LocalDateTime toDateTime) {
+        this.accountNbr = accountNbr;
         this.filename = filename;
         this.fromDateTime = fromDateTime;
         this.toDateTime = toDateTime;
+    }
+
+    public String getAccountNbr() {
+        return accountNbr;
     }
 
     String getFilename() {
@@ -34,6 +41,12 @@ class Arguments {
     }
 
     boolean isValid() {
+
+        // Validate the filename
+        if (StringUtils.isBlank(accountNbr)) {
+            System.err.println("An accountId must be provided");
+            return false;
+        }
 
         // Validate the filename
         if (StringUtils.isBlank(filename)) {
