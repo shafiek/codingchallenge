@@ -41,7 +41,8 @@ public class App {
         TransactionCollator collator = new TransactionCollator();
         TransactionSummary transactionSummary = collator.collate(arguments.getAccountNbr(),
                 arguments.getFromDateTime(),
-                arguments.getToDateTime(), transactions);
+                arguments.getToDateTime(),
+                transactions);
 
         // print the transactionSummary
         DecimalFormat decimalFormat = new DecimalFormat("$0.00");
