@@ -9,6 +9,9 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Map;
 
+/**
+ * A class that retrieves {@link Transaction} from the {@link Transaction} store.
+ */
 public class TransactionDao {
 
     private TransactionParser parser = new TransactionParser();
@@ -18,6 +21,7 @@ public class TransactionDao {
      * fromAccount number or to accountNumber that matches accountNbr.
      *
      * @param accountNbr The account number to match
+     * @param inputStream The {@link InputStream} from which to read the {@link Transaction}
      * @return List of matching Transactions
      * @throws IOException .
      */

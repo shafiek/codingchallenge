@@ -4,10 +4,14 @@ import com.savahl.mebank.codechallenge.dao.TransactionDao;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.Map;
 
 public class App {
+
+    private App() {
+    }
 
     /**
      * This is a main method.
@@ -20,14 +24,18 @@ public class App {
 
         // make sure the args are correct
         if (!arguments.isValid()) {
+            printUsage();
             System.exit(-1);
         }
 
         // Retrieve the Transactions for the matching accountNbr
         TransactionDao transactionDao = new TransactionDao();
-        Map<String, Transaction> transactions =
-                transactionDao.getTransactionsByAccountNumber(arguments.getAccountNbr(),
-                        new FileInputStream(arguments.getFilename()));
+        Map<String, Transaction> transactions;
+
+        try (InputStream inputStream = new FileInputStream(arguments.getFilename())) {
+            transactions = transactionDao.getTransactionsByAccountNumber(arguments.getAccountNbr(),
+                    inputStream);
+        }
 
         // Collate the transactions
         TransactionCollator collator = new TransactionCollator();
@@ -49,6 +57,26 @@ public class App {
     }
 
     private static void printUsage() {
+        System.err.println("\nUsage: java -jar {path to jar/codingchallenge.jar} "
+                + "-file [file] "
+                + "-accountId [accountId] "
+                + "-from [from date] "
+                + "-to [to date]");
 
+        System.err.println("\t-file\t\t"
+                + "A CSV file in the Transaction list format defined by the coding challenge");
+        System.err.println("\t-accountId\t"
+                + "The accountId for which you would like to print the details");
+        System.err.println("\t-from\t\t"
+                + "The from Date Time in in the format DD/MM/YYYY hh:mm:ss");
+        System.err.println("\t-to\t\t\t"
+                + "The to Date Time in in the format DD/MM/YYYY hh:mm:ss");
+
+        System.err.println("\n\nExample: "
+                + "java -jar ./build/libs/codingchallenge.jar "
+                + "-file sample.csv "
+                + "-accountId ACC334455 "
+                + "-from \"20/10/2018 12:00:00\" "
+                + "-to \"20/10/2018 19:00:00\"");
     }
 }

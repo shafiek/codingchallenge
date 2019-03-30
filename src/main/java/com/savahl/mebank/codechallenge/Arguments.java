@@ -24,7 +24,7 @@ class Arguments {
         this.toDateTime = toDateTime;
     }
 
-    public String getAccountNbr() {
+    String getAccountNbr() {
         return accountNbr;
     }
 
@@ -39,6 +39,7 @@ class Arguments {
     LocalDateTime getToDateTime() {
         return toDateTime;
     }
+
 
     boolean isValid() {
 

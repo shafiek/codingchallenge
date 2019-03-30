@@ -3,7 +3,7 @@ package com.savahl.mebank.codechallenge;
 import java.time.LocalDateTime;
 
 /**
- * An immutable class that hold the Transaction details.
+ * An immutable class that holds the {@link Transaction} details.
  */
 public class Transaction {
     private final String transactionId;
@@ -20,11 +20,11 @@ public class Transaction {
      * @param transactionId Transaction Id
      * @param fromAccountId From Account ID
      * @param toAccountId To Account ID
-     * @param createAt The date and time the Transaction occurred
-     * @param amount The amount related to the Transction
+     * @param createAt The date and time the {@link Transaction} occurred
+     * @param amount The amount related to the {@link Transaction}
      * @param type The type of the Transaction {@link TransactionType}
      * @param relatedTransaction If the {@link TransactionType} is REVERSAL then this is the
-     *                           related Transaction ID
+     *                           related {@link Transaction} Id
      */
     public Transaction(String transactionId,
                        String fromAccountId,
