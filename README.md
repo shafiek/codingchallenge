@@ -48,7 +48,9 @@ Example: java -jar ./build/libs/codingchallenge.jar -file sample.csv -accountId 
 
 1. Perform much better error handling in a number of places including input arguments and reading from the csv file.
 2. Fine tuning of the checkstyle file.
-3. Fine tuning of the dependencyCheckAnalyze, so as not to fail for minor CVEs.
+3. Fine tuning of the dependencyCheckAnalyze, so as not to fail for minor CVEs.  A better approach will be to use something [Snyk](https://snyk.io/), as it provides a better enterprise solution for dependency reporting.
 4. Setting up a CI server such as Jenkins or Bamboo to build on commit.
 5. Setup the gradle release plugin to create releases (and tag) via the CI server.
 6. Fail the build on a regression in unit test code coverage. 
+7. Use [SonarQube](https://www.sonarqube.org/).
+8. Run an enterprise dependency repository like [nexus](https://www.sonatype.com/nexus-repository-sonatype).  
