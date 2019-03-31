@@ -29,7 +29,18 @@ To run the code you can issue the following command
 
 A sample csv file, sample.csv, has been included.
 
-Running `java -jar ./build/libs/codingchallenge.jar` will print the usage.
+Running `java -jar ./build/libs/codingchallenge.jar` will print the usage:
+
+```
+Usage: java -jar {path to jar/codingchallenge.jar} -file [file] -accountId [accountId] -from [from date] -to [to date]
+        -file           A CSV file in the Transaction list format defined by the coding challenge
+        -accountId      The accountId for which you would like to print the details
+        -from           The from Date Time in the format DD/MM/YYYY hh:mm:ss
+        -to             The to Date Time in the format DD/MM/YYYY hh:mm:ss
+
+
+Example: java -jar ./build/libs/codingchallenge.jar -file sample.csv -accountId ACC334455 -from "20/10/2018 12:00:00" -to "20/10/2018 19:00:00"
+```
 
 **Note**: the fat jar `build/libs/codingchallenge.jar` is included in this repository only for convenience.  It is not good practice to include a generated file in a source code repository.
 

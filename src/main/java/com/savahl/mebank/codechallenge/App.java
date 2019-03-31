@@ -69,9 +69,9 @@ public class App {
         System.err.println("\t-accountId\t"
                 + "The accountId for which you would like to print the details");
         System.err.println("\t-from\t\t"
-                + "The from Date Time in in the format DD/MM/YYYY hh:mm:ss");
+                + "The from Date Time in the format DD/MM/YYYY hh:mm:ss");
         System.err.println("\t-to\t\t"
-                + "The to Date Time in in the format DD/MM/YYYY hh:mm:ss");
+                + "The to Date Time in the format DD/MM/YYYY hh:mm:ss");
 
         System.err.println("\n\nExample: "
                 + "java -jar ./build/libs/codingchallenge.jar "
