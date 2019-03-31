@@ -41,7 +41,13 @@ class TransactionCollator {
                     && !reversedTxns.contains(transaction.getTransactionId())) {
 
                 float txnAmount = transaction.getAmount();
-                if (accountNbr.equals(transaction.getFromAccountId())) {
+
+                // handle the case where the from and to account numbers are the same
+                // if this is the same then the txnAmount = 0;
+                if (transaction.getToAccountId().equals(transaction.getFromAccountId())
+                        && accountNbr.equals(transaction.getToAccountId())) {
+                    txnAmount = 0;
+                } else if (accountNbr.equals(transaction.getFromAccountId())) {
                     txnAmount = txnAmount * -1; // debit from the accountNbr
                 }
 

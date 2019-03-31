@@ -45,4 +45,31 @@ public class TransactionCollatorTest {
         assertEquals(1, summary.getNumberOfTransactions());
         assertEquals(-25.0f, summary.getAmount(), 0.0f);
     }
+
+    @Test
+    public void testFromAndToAccountTheSame() throws IOException {
+        final String sameAcctTxn =
+                "TX10001, ACC334455, ACC334455, 20/10/2018 12:47:55, 25.00, PAYMENT";
+
+        // Set up the test
+        InputStream inputStream = new ByteArrayInputStream(sameAcctTxn.getBytes());
+
+        TransactionDao transactionDao = new TransactionDao();
+
+        final String accountNbr = "ACC334455";
+
+        Map<String, Transaction> transactions =
+                transactionDao.getTransactionsByAccountNumber(accountNbr, inputStream);
+
+        // Perform the action
+        LocalDateTime from = LocalDateTime.of(2018, 10, 20, 12, 0, 0);
+        LocalDateTime to = LocalDateTime.of(2018, 10, 20, 19, 0, 0);
+
+        TransactionCollator collator = new TransactionCollator();
+        TransactionSummary summary = collator.collate(accountNbr, from, to, transactions);
+
+        // Assert the values
+        assertEquals(1, summary.getNumberOfTransactions());
+        assertEquals(0.0f, summary.getAmount(), 0.0f);
+    }
 }
